@@ -1,4 +1,3 @@
-
 import 'package:aplikasi_nonton_id/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
+  @override
+  void initState() {
+    setState(() {
+      startTimer();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +26,23 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset("assets/images/splash_screen.png", fit: BoxFit.cover),
+            Image.asset(
+              "assets/images/splash_screen.png",
+              fit: BoxFit.cover,
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Color(0xFF1C1A29),
-                Color.fromRGBO(28, 26, 41, 0.53)
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF1C1A29),
+                    Color.fromRGBO(28, 26, 41, 0.53),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
             ),
             Positioned(
               top: 100,
@@ -42,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   )
                 ],
               ),
@@ -53,6 +66,14 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+  void startTimer() async {
+    const duration = Duration(seconds: 3);
+    await Future.delayed(duration);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
+  }
 }
-
-
